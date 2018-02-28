@@ -8,19 +8,22 @@
     <title>Giphy API</title>
 </head>
 <body>
-    <!-- Buttons display -->
-    <div id="topicButtons">
+    <div id="container">
+        <!-- Buttons display -->
+        <div id="topic-buttons"></div>
 
-    </div>
-    <!-- Giphy form -->
-    <form id="topic-form">
-        <label for="topic-input">Add an animal</label>
-        <input id="topics-input" type="text" type="submit" value="submit">
-    </form>
-    <!-- Gifs display -->
-    <div id="topic">
+        <!-- Giphy form -->
+        <form id="topic-form">
+            <label for="topic-input">Add an animal</label>
+            <input type="text" id="topic-input"><br>
+            <!-- Button triggers new animal/topic to submit -->
+            <input id="add-topic" type="submit" value="Add an animal">
+        </form>
 
-    </div>
+        <!-- Gifs display -->
+        <div id="topic-display"></div>
+
+    </div> 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script src="assets/javascript/app.js"></script>
 </body>

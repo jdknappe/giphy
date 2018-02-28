@@ -1,11 +1,16 @@
+// --------------------------------------------------------------------------------------------
+// stuff I need for later:
+
+// host = api.giphy.com
+
+// path = /v1/gifs/search
+
+// all together queryURL is "http://api.giphy.com/v1/gifs/search"
+// --------------------------------------------------------------------------------------------
+
 // create an array of strings
 var topics = [
     "chinchilla", 
-    "dog", 
-    "cat", 
-    "goat", 
-    "cow", 
-    "chicken", 
     "bat", 
     "tiger", 
     "axolotl", 
@@ -13,10 +18,37 @@ var topics = [
     "hawk", 
     "eagle"
 ];
-// function for displaying animals
+
+// displayAnimalInfo re-renders the HTML to display appropriate content
+function displayAnimalInfo() {
+
+var api_key = "&api_key=GXWvgik3KncEquD8z7HjiF94kBDSpTfr"
+var query = "&q=animal"
+var queryURL = "https://api.giphy.com/v1/gifs/search"+ api_key + query + "limit=10&offset=0&rating=PG&lang=en"
+
+// ajax call
+$.ajax({
+    url: queryURL,
+    method: 'GET'
+}).then(function (response) {
+    // create div to hold animal gif
+    var animalDiv = $("<div class='animal'>");
+    // store rating data
+    var rating = response.rating;
+    // creating an element to have rating displayed
+    var pOne = $("<p>").text("Rating: " + rating);
+    // Displays the rating
+    animalDiv.append(pOne);
+    // displays in "topic-display"
+    $("#topics-display").prepend(movieDiv)
+
+})
+}
+
+// function for displaying array items
 function renderButtons() {
     // deletes buttons prior to adding movie buttons
-    $("#topicButtons").empty()
+    $("#topic-buttons").empty()
     // loops through topics array
     for (var i = 0; i <topics.length; i++) {
         // creates a button
@@ -28,17 +60,19 @@ function renderButtons() {
         // providing the button's text with a value of the topic at index i
         a.text(topics[i])
         // adds the button to the HTML
-        $("#topicButtons").append(a);
+        $("#topic-buttons").append(a);
     }
 }
 // handle events on input submission
-$("#topics-input").on("submit", function(event) {
+$("#add-topic").on("click", function(event) {
     event.preventDefault()
     // grabs text from input box
-    var animal = $("#topics-input").val().trim()
+    var animal = $("#topic-input").val().trim()
     // the topic from the textbox is added to the array
     topics.push(animal)
     // call the renderButtons function at least once to display initial list of animals in topics array
     renderButtons()
 })
+
+renderButtons()
 
