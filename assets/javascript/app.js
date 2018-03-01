@@ -22,27 +22,10 @@ var topics = [
 // displayAnimalInfo re-renders the HTML to display appropriate content
 function displayAnimalInfo() {
 
-var api_key = "&api_key=GXWvgik3KncEquD8z7HjiF94kBDSpTfr"
+var api_key = "api_key=GXWvgik3KncEquD8z7HjiF94kBDSpTfr"
 var query = "&q=animal"
-var queryURL = "https://api.giphy.com/v1/gifs/search"+ api_key + query + "limit=10&offset=0&rating=PG&lang=en"
+var queryURL = "https://api.giphy.com/v1/gifs/search?"+ api_key + query + "limit=10&offset=0&rating=PG&lang=en"
 
-// ajax call
-$.ajax({
-    url: queryURL,
-    method: 'GET'
-}).then(function (response) {
-    // create div to hold animal gif
-    var animalDiv = $("<div class='animal'>");
-    // store rating data
-    var rating = response.rating;
-    // creating an element to have rating displayed
-    var pOne = $("<p>").text("Rating: " + rating);
-    // Displays the rating
-    animalDiv.append(pOne);
-    // displays in "topic-display"
-    $("#topics-display").prepend(movieDiv)
-
-})
 }
 
 // function for displaying array items
@@ -72,7 +55,22 @@ $("#add-topic").on("click", function(event) {
     topics.push(animal)
     // call the renderButtons function at least once to display initial list of animals in topics array
     renderButtons()
+    
+    // ajax call
+$.ajax({
+    url: queryURL,
+    method: 'GET'
+}).then(function (response) {
+    // create div to hold animal gif
+    var animalDiv = $("<div class='animal'>");
+    // store rating data
+    var rating = response.rating;
+    // creating an element to have rating displayed
+    var pOne = $("<p>").text("Rating: " + rating);
+    // Displays the rating
+    animalDiv.append(pOne);
+    // displays in "topic-display"
+    $("#topics-display").prepend(movieDiv)
 })
 
 renderButtons()
-
